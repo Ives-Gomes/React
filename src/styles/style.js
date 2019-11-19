@@ -1,11 +1,4 @@
 import styled from 'styled-components';
-import { createGlobalStyle } from 'styled-components'
-
-export const GlobalStyle = createGlobalStyle`
-  body {
-    background: ${props => (props.theme ? "black" : "white")}
-  }
-`;
 
 export const Div = styled.div`
   background: #7DBFE8;

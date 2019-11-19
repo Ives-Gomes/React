@@ -8,7 +8,6 @@ export default class App extends Component {
     this.state = {
       var: 0,
       cont: 0,
-      theme: true,
     };
   }
   
@@ -17,17 +16,10 @@ export default class App extends Component {
     this.setState({ cont: this.state.cont + 1 })
   }
 
-  handleTheme = () => {
-    this.setState({
-      theme: false,
-    })
-  }
-
   render() {
     let teste = 3;
 
     return (
-      <GlobalStyle theme={theme}>
         <Div>
           <i class="fas fa-award"></i>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
@@ -35,9 +27,8 @@ export default class App extends Component {
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
             nisi ut aliquip ex ea commodo consequat. {this.state.var}, Contador:
             {this.state.cont}</p>
-          <button onClick={() => this.handleTheme()}>ADD</button>  
-        </Div> 
-      </GlobalStyle>  
+          <button onClick={() => this.handleClick(teste)}>ADD</button>  
+        </Div>  
     );
   }  
 }
