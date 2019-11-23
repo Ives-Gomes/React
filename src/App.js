@@ -6,8 +6,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      var: 0,
-      cont: 0,
+      var: '',
       background: '#7DBFE8',
       display: 'none',
       displayInput: '',
@@ -16,7 +15,7 @@ export default class App extends Component {
   
   handleClick = (teste) => {
     this.setState({ var: teste });
-    this.setState({ cont: this.state.cont + 1 });
+    this.setState({ var: Number(this.state.var) + 1 });
 
     if(this.state.background === '#7DBFE8') {
       this.setState({ background: '#fff' });
@@ -25,13 +24,17 @@ export default class App extends Component {
     }
   }
 
-  handleDisplay = (display) => {
+  handleDisplay = () => {
     this.setState({ display: '' });
     this.setState({ displayInput: 'none' });
   }
 
+  handleChange = (event) => {
+      this.setState({var: event.target.value});
+  }
+
   render() {
-    let teste = 3;
+    let teste = 0;
     const { background } = this.state;
     const { display } = this.state;
     const { displayInput } = this.state;
@@ -40,13 +43,15 @@ export default class App extends Component {
       <div>      
         <Div style = {{ backgroundColor: background }}>
           <div style={{ display: displayInput  }}>
-            <input type="number"/>
+            <p>Digite o valor inicial do contador:</p>
+            <input type="number"value={this.state.var} 
+            onChange={this.handleChange}/>
             <button onClick={() => this.handleDisplay(display)} 
             className="button__input">OK</button>
           </div>
           <div style={{ display: display }}>
             <i className="fas fa-infinity"></i>
-            <p>Contador: {this.state.cont}</p>
+            <p>Contador: {this.state.var}</p>
             <button onClick={() => this.handleClick(teste)}
             className="button__counter">ADD</button>
           </div>       
