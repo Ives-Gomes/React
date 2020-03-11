@@ -1,43 +1,37 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Form, Input } from "@rocketseat/unform";
 import'./styles/index.css'; 
 
 export default function App() {
-  const [repositories, setRepositories] = useState([]);
-  const [count, setCount] = useState(0);
-  const [background, setBackground] = useState('#fff')
+  const [pokeName, setPokeName] = useState();
+  const [pokeSprite, setPokeSprite] = useState();
 
-  useEffect(async () => {
-    const response = await fetch('https://api.github.com/users/Ives-Gomes/repos');
-    const data = await response.json();
+  const handleSubmit = async (poke, { resetForm }) => {   
+    const response = await axios.get(`
+    https://pokeapi.co/api/v2/pokemon/${poke.pokemon}/     
+    `);
 
-    setRepositories(data);
-  }, []);
+    const name = response.data.name;
+    const sprite = response.data.sprites.front_default;
 
-  useEffect(() => {
-    document.title = `You clicked ${count} times`;
-  });
+    setPokeName(name);
+    setPokeSprite(sprite);
 
-  function handleAdd() {
-    setCount(count + 1)
-
-    if(background === '#fff') {
-      setBackground('blue')
-    } else {
-      setBackground('#fff')
-    } 
-    
+    resetForm();
   }
-
+    
   return (
-    <div style={{backgroundColor: background}}>
-      <ul>
-        {repositories.map(repo => (
-        <li key={repo.id}>{repo.name}</li>
-        ))}
-      </ul>
-
-        <h1>{count}</h1>
-        <button onClick={() => handleAdd()}>ADD</button>
-    </div>  
+    <div>
+      <h1>Pokémon</h1>
+      <Form onSubmit={handleSubmit}>
+        <Input 
+          name="pokemon"
+          autoComplete="off"
+        />
+      </Form>
+      {<p>{pokeName}</p>}
+      {<img src={pokeSprite} alt=""/>}
+    </div>
   );
 }
