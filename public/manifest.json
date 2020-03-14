@@ -3,7 +3,17 @@
   "name": "Pokémon - PWA",
   "icons": [
     {
-      "src": "pokebola.png",
+      "src": "p96.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "p2.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "p3.png",
       "type": "image/png",
       "sizes": "512x512"
     }
