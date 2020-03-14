@@ -1,26 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import axios from 'axios';
+import { Form, Input } from "@rocketseat/unform";
+import'./index.css'; 
 
-function App() {
+export default function App() {
+  const [pokeName, setPokeName] = useState();
+  const [pokeSprite, setPokeSprite] = useState();
+
+  const handleSubmit = async (poke, { resetForm }) => {   
+    const response = await axios.get(`
+    https://pokeapi.co/api/v2/pokemon/${poke.pokemon}/     
+    `);
+
+    const name = response.data.name;
+    const sprite = response.data.sprites.front_default;
+
+    setPokeName(name.toLowerCase());
+    setPokeSprite(sprite);
+
+    resetForm();
+  }
+    
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Pokémon</h1>
+      <div className="poke">
+        <Form onSubmit={handleSubmit}>
+          <Input 
+            name="pokemon"
+            autoComplete="off"
+          />
+          <button type="submit" onSubmit={handleSubmit}>Temos que Pegar!</button>
+        </Form>
+
+        {<p>{pokeName}</p>}
+        {<img src={pokeSprite} alt=""/>}
+      </div>    
     </div>
   );
 }
-
-export default App;
