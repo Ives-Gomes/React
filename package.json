@@ -28,5 +28,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "main": "index.js",
+  "repository": "https://github.com/Ives-Gomes/React.git",
+  "author": "Ives <ivesmoreira3@gmail.com>",
+  "license": "MIT"
 }
