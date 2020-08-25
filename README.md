@@ -1,3 +1,3 @@
 ### ReactJS
 
-* estudos e testes com ReactJS.
+* Studies and tests with ReactJS.
